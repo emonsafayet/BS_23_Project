@@ -5,9 +5,15 @@
 
 <h2>Posts and Comment</h2>
 
+
+
+
+
 <div id="updatePanel">
 
 </div>
+
+
 
 @section Scripts{
 
@@ -43,11 +49,20 @@
                         $table.append($header);
 
                         //table  body
-                        $.each(data.posts, function (i, emp) {
+                        $.each(data.posts, function (i, post) {
+                            //datetime to date
+                            var today = new Date(post.PostedDate);
+                            var dd = String(today.getDate()).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            var yyyy = today.getFullYear();
+                            today = mm + '/' + dd + '/' + yyyy;
+
+
+
                             var $row = $('<tr/>');
-                            $row.append($('<td/>').html(emp.Text));
-                            $row.append($('<td/>').html(emp.UserId));
-                            $row.append($('<td/>').html(emp.PostedDate)); 
+                            $row.append($('<td/>').html(post.Text));
+                            $row.append($('<td/>').html(post.UserId));
+                            $row.append($('<td/>').html(today)); 
                             $table.append($row);
                         });
 
